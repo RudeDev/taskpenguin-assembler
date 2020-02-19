@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-public class UserController {
+public class PersonController {
 
     @Autowired
     private PersonRepository personRepository;
@@ -40,6 +39,13 @@ public class UserController {
     @ResponseBody
     public List<Person> findAll() {
         return personRepository.findAll();
+    }
+
+    @RequestMapping(value = "/email/{email}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Person findPersonByEmail(@PathVariable String email) {
+        return personRepository.findPersonByEmail(email);
     }
 
 }
